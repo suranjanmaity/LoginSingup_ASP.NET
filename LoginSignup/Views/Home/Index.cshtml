@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Admin LogIn";
+}
+@model AccountModel
+<div class="container flex-column align-content-center justify-content-center">
+    <div class="row">
+        <div class="col-4">
+            <form method="post" asp-controller="Home" asp-action="Index">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control">
+                <label asp-for="Gender"></label>
+                <div class
+                <input type="radio" asp-for="Gender" value="Male" class="form-check-input">
+                <input type="radio" asp-for="Gender" value="Female" class="form-check-input">
+                <label asp-for="Hobbies"></label>
+                <input asp-for="Hobbies" class="form-control"/>
+                <label asp-for="SourceOfIncome"></label>
+                <select asp-for="SourceOfIncome" class="form-control" asp-items="Html.GetEnumSelectList<SourceOfIncome>()"></select>
+                <label asp-for="Income"></label>
+                <input asp-for="Income" class="form-control"/>
+                <label asp-for="Age"></label>
+                <input asp-for="Age" class="form-control"/>
+                <label asp-for="Bio"></label>
+                <input asp-for="Bio" class="form-control"/>
+                <button type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+
+</div>

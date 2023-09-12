@@ -18,7 +18,7 @@ namespace LoginSignup.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult CreateAccount()
         {
             return View();
         }

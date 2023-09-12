@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Create Account";
+}
+@model AccountModel
+<div class="container w-auto d-flex flex-column align-items-center justify-content-center custom-bg-gray rounded-3">
+
+    <div class="fs-2 fw-500 custom-bg-gray">Create Account</div>
+    <div class="w-50 w-auto border bg-light rounded-2 p-2">
+        <div class="border-4">
+            <form method="post" asp-controller="Home" asp-action="Index"
+                  class="w-100 d-flex flex-column gap-1">
+                <div class="d-flex gap-3">
+                    <div class="w-100">
+                        <label class="fw-500 custom-color" asp-for="FirstName"></label>
+                        <input asp-for="FirstName" class="form-control" placeholder="enter your first name">
+                    </div>
+                    <div class="w-100">
+                        <label class="fw-500 custom-color" asp-for="LastName"></label>
+                        <input asp-for="LastName" class="form-control" placeholder="enter your last name">
+                    </div>
+                </div>
+                <label class="fw-500 custom-color" asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" placeholder="enter your email">
+
+                <div class="d-flex gap-3">
+                    <div class="w-100">
+                        <label class="fw-500 custom-color" asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" placeholder="enter your password">
+                    </div>
+                    <div class="w-100">
+                        <label class="fw-500 custom-color" asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="enter your password again">
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                    <div class="w-100">
+                        <label class="fw-500 custom-color" asp-for="Gender"></label>
+                        <div class="d-flex">
+                            <div class="form-check">
+                                <input type="radio" asp-for="Gender" value="Male" class="form-check-input">
+                                <label class="form-check-label">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="Gender" value="Female" class="form-check-input">
+                                <label class="form-check-label">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-100">
+                        <label class="fw-500 custom-color" asp-for="Hobbies"></label>
+                        <input asp-for="Hobbies" class="form-control">
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                    <div class="w-100">
+                        <label class="fw-500 custom-color" asp-for="SourceOfIncome"></label>
+                        <select asp-for="SourceOfIncome" class="form-control" asp-items="Html.GetEnumSelectList<SourceOfIncome>()"></select>
+                    </div>
+                    <div class="w-100 d-flex justify-content-center gap-2">
+                        <div class="w-100">
+                            <label class="fw-500 custom-color" asp-for="Income"></label>
+                            <input type="range" value="20000" min="20000" max="100000" step="1000" asp-for="Income" class="form-control" id="sal-range">
+                        </div>
+                        <div class="w-15 custom-bg text-light h-50 rounded-3 p-1" id="sal-value">
+                            20K
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex gap-3">
+                    <div class="w-100">
+                        <label class="fw-500 custom-color">Upload Profile Picture</label>
+                        <input type="file">
+                    </div>
+                    <div class="w-100">
+                        <label class="fw-500 custom-color" asp-for="Age"></label>
+                        <input asp-for="Age" class="form-control">
+                    </div>
+                </div>
+                <label class="fw-500 custom-color" asp-for="Bio"></label>
+                <textarea asp-for="Bio" class="form-control" rows="3"></textarea>
+                <button class="fw-500 text-white custom-bg rounded w-25 align-self-end border-0" type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script src="~/lib/jquery/dist/jquery.js" ></script>
+<script>
+    $('#sal-range').change(function () {
+        let sal_value = parseInt($('#sal-range').val())/1000;
+        sal_value = sal_value + "K";
+        $('#sal-value').text(sal_value);
+    });
+</script>

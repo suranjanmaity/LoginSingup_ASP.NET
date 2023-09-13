@@ -36,7 +36,7 @@
                 <div class="d-flex gap-3">
                     <div class="w-100">
                         <label class="fw-500 custom-color" asp-for="Gender"></label>
-                        <div class="d-flex">
+                        <div class="d-flex gap-3">
                             <div class="form-check">
                                 <input type="radio" asp-for="Gender" value="Male" class="form-check-input">
                                 <label class="form-check-label">
@@ -52,8 +52,25 @@
                         </div>
                     </div>
                     <div class="w-100">
-                        <label class="fw-500 custom-color" asp-for="Hobbies"></label>
-                        <input asp-for="Hobbies" class="form-control">
+                        <label class="fw-500 custom-color d-flex flex-row">Hobbies</label>
+                        <div class="d-flex gap-3">
+                            <div class="d-flex">
+                                <input type="checkbox" asp-for="Music" class="form-check" value="false">
+                                <label asp-for="Music" class="form-check-label"></label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="checkbox" asp-for="Sports" class="form-check" value="false">
+                                <label asp-for="Sports" class="form-check-label"></label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="checkbox" asp-for="Travel" class="form-check" value="false">
+                                <label asp-for="Travel" class="form-check-label"></label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="checkbox" asp-for="Movies" class="form-check" value="false">
+                                <label asp-for="Movies" class="form-check-label"></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

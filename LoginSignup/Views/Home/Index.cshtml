@@ -2,5 +2,37 @@
     ViewData["Title"] = "Admin LogIn";
 }
 @model AccountModel
-
-    <a asp-controller="Home" asp-action="CreateAccount">Sign Up</a>
+<div class="d-flex flex-column align-items-center justify-content-center gap-2 border bg-light w-25 px-3 pt-4 pb-5 rounded-3 shadow-md custom-shadow">
+    <div class="w-100 d-flex flex-column align-items-start">
+        <div class=" fs-3 fw-500 custom-color-blue">
+            Admin Log In
+        </div>
+        <div>
+            Log in with your register account.
+        </div>
+    </div>
+    <div class="p-2 w-100">
+        <div class="border d-flex w-100">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <span class="bi bi-envelope-fill"></span>
+                </span>
+                <input type="text" class="form-control" asp-for="Email" placeholder="Email">
+            </div>
+        </div>
+        <div class="border d-flex w-100">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <span class="bi-key-fill"></span>
+                </span>
+                <input type="text" class="form-control" asp-for="Password" placeholder="Password">
+            </div>
+        </div>
+    </div>
+    <div class="custom-bg-blue text-white rounded-pill w-100 text-center fw-bold p-2 m-1">
+        Log In
+    </div>
+    <div class="pt-3">
+        Didn't have account? <a asp-controller="Home" asp-action="CreateAccount">Sign Up</a>
+    </div>
+</div>

@@ -21,26 +21,37 @@ html {
 .custom-color{
     color: #1bba94;
 }
+.custom-color-blue {
+    color: #5379a3;
+}
 .custom-bg{
     background-color:#1bba94;
+}
+.custom-bg-blue {
+    background-color: #5379a3;
 }
 .custom-bg-gray {
     background-color: #eef0f2;
 }
+.custom-shadow {
+    box-shadow: 0 0 10px gray,0 0 0 150vh rgba(255,255,255,0.5);
+}
+
+
 main{
     background-image:url(../images/nts-bg.png)
 }
 /***** Track Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-runnable-track {
-    background: #053a5f;
+    background: gray;
     height: 0.5rem;
     border-radius:.5rem;
 }
 
 /******** Firefox ********/
 input[type="range"]::-moz-range-track {
-    background: #053a5f;
+    background: gray;
     height: 0.5rem;
     border-radius:.5rem;
 }

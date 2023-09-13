@@ -7,25 +7,32 @@ namespace LoginSignup.Models
     {
         public int Id { get; set; }
         [DisplayName("First Name *")]
-        [Required]
+        [Required(ErrorMessage = "Name is required")]
         public string FirstName { get; set; } = null!;
         [DisplayName("Last Name")]
         public string? LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [DisplayName("Email *")]
         public string Email { get; set; } = null!;
-        [Required]
+        [Required(ErrorMessage ="Password is required")]
         [DisplayName("Password *")]
         public string Password { get; set; } = null!;
         [DisplayName("Confirm Password *")]
-        [Required]
+        [Required(ErrorMessage ="Needs same as Password")]
         public string ConfirmPassword { get; set; } = null!;
+        [Required(ErrorMessage = "One must be selected")]
         public string Gender { get; set; } = null!;
-        public List<string>? Hobbies { get; set; }
+        public bool Music { get; set; }
+        public bool Sports { get; set; }
+        public bool Travel { get; set; }
+        public bool Movies { get; set; }
         [DisplayName("Source Of Income")]
         public SourceOfIncome SourceOfIncome { get; set; }
         public int Income { get; set; }
+        [Required(ErrorMessage = "Must be between 18 and 100")]
+        [Range(18,100,ErrorMessage ="Must be between 18 and 100")]
         public int Age { get; set; }
+
         public string? Bio { get; set; }
     }
     public enum SourceOfIncome

@@ -7,35 +7,54 @@
     <div class="fs-2 fw-500 custom-bg-gray">Create Account</div>
     <div class="w-50 w-auto border bg-light rounded-2 p-2">
         <div class="border-4">
-            <form method="post" asp-controller="Home" asp-action="Index"
+            <form method="post" asp-controller="Home" asp-action="CreateAccount"
                   class="w-100 d-flex flex-column gap-1">
+                @* <div asp-validation-summary="All" class="w-100 align-self-start"></div> *@
                 <div class="d-flex gap-3">
                     <div class="w-100">
-                        <label class="fw-500 custom-color" asp-for="FirstName"></label>
+                        <div>
+                            <label class="fw-500 custom-color" asp-for="FirstName"></label>
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
                         <input asp-for="FirstName" class="form-control" placeholder="enter your first name">
                     </div>
                     <div class="w-100">
-                        <label class="fw-500 custom-color" asp-for="LastName"></label>
+                        <div>
+                            <label class="fw-500 custom-color" asp-for="LastName"></label>
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
                         <input asp-for="LastName" class="form-control" placeholder="enter your last name">
                     </div>
                 </div>
-                <label class="fw-500 custom-color" asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" placeholder="enter your email">
+                <div>
+                    <label class="fw-500 custom-color" asp-for="Email"></label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <input asp-for="Email" type="email" class="form-control" placeholder="enter your email">
 
                 <div class="d-flex gap-3">
                     <div class="w-100">
-                        <label class="fw-500 custom-color" asp-for="Password"></label>
+                        <div>
+                            <label class="fw-500 custom-color" asp-for="Password"></label>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
                         <input asp-for="Password" class="form-control" placeholder="enter your password">
                     </div>
                     <div class="w-100">
-                        <label class="fw-500 custom-color" asp-for="ConfirmPassword"></label>
+                        <div>
+                            <label class="fw-500 custom-color" asp-for="ConfirmPassword"></label>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
                         <input asp-for="ConfirmPassword" class="form-control" placeholder="enter your password again">
                     </div>
                 </div>
 
                 <div class="d-flex gap-3">
                     <div class="w-100">
-                        <label class="fw-500 custom-color" asp-for="Gender"></label>
+                        <div>
+                            <label class="fw-500 custom-color" asp-for="Gender"></label>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
                         <div class="d-flex gap-3">
                             <div class="form-check">
                                 <input type="radio" asp-for="Gender" value="Male" class="form-check-input">
@@ -95,7 +114,10 @@
                         <input type="file">
                     </div>
                     <div class="w-100">
-                        <label class="fw-500 custom-color" asp-for="Age"></label>
+                        <div>
+                            <label class="fw-500 custom-color" asp-for="Age"></label>
+                            <span asp-validation-for="Age" class="text-danger"></span>
+                        </div>
                         <input asp-for="Age" class="form-control">
                     </div>
                 </div>
@@ -115,3 +137,8 @@
         $('#sal-value').text(sal_value);
     });
 </script>
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial"/>
+    }
+}

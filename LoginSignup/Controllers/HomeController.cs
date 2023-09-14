@@ -1,4 +1,6 @@
-﻿using LoginSignup.Models;
+﻿using LoginSignup.Data;
+using LoginSignup.Models;
+using LoginSignup.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -20,32 +22,21 @@ namespace LoginSignup.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AdminLogin(string Email,string Password)
+        public IActionResult AdminLogin(LoginViewModel logObj)
         {
-            var categoryFromDb = _db.Accounts.SingleOrDefault(o=>(o.Email==Email&&o.Password==Password));
-            if (categoryFromDb == null)
+            
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                var accFromDb = _db.Accounts.SingleOrDefault(catObj => (catObj.Email == logObj.Email && catObj.Password == logObj.Password));
+                if (accFromDb == null)
+                {
+                    ModelState.AddModelError("Password","Email and password didn't match");
+                    return View("Index", logObj);
+                }
+                return RedirectToAction("AdminLogin","Login",accFromDb);
             }
-            return View(categoryFromDb);
+            return View("Index",logObj);
         }
-        public IActionResult CreateAccount() 
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CreateAccount(AccountModel obj)
-        {
-            if(ModelState.IsValid)
-            {
-                _db.Accounts.Add(obj);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

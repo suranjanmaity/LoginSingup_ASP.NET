@@ -13,6 +13,7 @@ namespace LoginSignup.Models
         public string? LastName { get; set; }
         [Required(ErrorMessage = "Email is required")]
         [DisplayName("Email *")]
+        [EmailAddress]
         public string Email { get; set; } = null!;
         [Required(ErrorMessage ="Password is required")]
         [DisplayName("Password *")]

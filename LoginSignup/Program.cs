@@ -1,4 +1,4 @@
-using LoginSignup.Models;
+using LoginSignup.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

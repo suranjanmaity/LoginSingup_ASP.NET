@@ -7,7 +7,7 @@
     <div class="fs-2 fw-500 custom-bg-gray">Create Account</div>
     <div class="w-50 w-auto border bg-light rounded-2 p-2">
         <div class="border-4">
-            <form method="post" asp-controller="Home" asp-action="CreateAccount"
+            <form method="post" asp-controller="Registration" asp-action="CreateAccount"
                   class="w-100 d-flex flex-column gap-1">
                 @* <div asp-validation-summary="All" class="w-100 align-self-start"></div> *@
                 <div class="d-flex gap-3">
@@ -74,19 +74,19 @@
                         <label class="fw-500 custom-color d-flex flex-row">Hobbies</label>
                         <div class="d-flex gap-3">
                             <div class="d-flex">
-                                <input type="checkbox" asp-for="Music" class="form-check" value="false">
+                                <input type="checkbox" asp-for="Music" class="form-check" >
                                 <label asp-for="Music" class="form-check-label"></label>
                             </div>
                             <div class="d-flex">
-                                <input type="checkbox" asp-for="Sports" class="form-check" value="false">
+                                <input type="checkbox" asp-for="Sports" class="form-check">
                                 <label asp-for="Sports" class="form-check-label"></label>
                             </div>
                             <div class="d-flex">
-                                <input type="checkbox" asp-for="Travel" class="form-check" value="false">
+                                <input type="checkbox" asp-for="Travel" class="form-check">
                                 <label asp-for="Travel" class="form-check-label"></label>
                             </div>
                             <div class="d-flex">
-                                <input type="checkbox" asp-for="Movies" class="form-check" value="false">
+                                <input type="checkbox" asp-for="Movies" class="form-check">
                                 <label asp-for="Movies" class="form-check-label"></label>
                             </div>
                         </div>

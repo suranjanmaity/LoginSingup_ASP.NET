@@ -1,8 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Admin LogIn";
 }
-@model AccountModel
-<div class="d-flex flex-column align-items-center justify-content-center gap-2 border bg-light w-25 px-3 pt-4 pb-5 rounded-3 shadow-md custom-shadow">
+@model LoginSignup.ViewModels.LoginViewModel
+<div class="d-flex flex-column align-items-center justify-content-center gap-2 border bg-light w-25 w-auto px-3 pt-4 pb-5 rounded-3 shadow-md custom-shadow">
     <div class="w-100 d-flex flex-column align-items-start">
         <div class=" fs-3 fw-500 custom-color-blue">
             Admin Log In
@@ -11,28 +11,32 @@
             Log in with your register account.
         </div>
     </div>
-    <div class="p-2 w-100">
-        <div class="border d-flex w-100">
-            <div class="input-group">
-                <span class="input-group-text">
-                    <span class="bi bi-envelope-fill"></span>
-                </span>
-                <input type="text" class="form-control" asp-for="Email" placeholder="Email">
+    <form method="post" asp-controller="Home" asp-action="AdminLogin">
+        <div class="p-2 w-100">
+            <div class="border d-flex flex-column w-100">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <span class="bi bi-envelope-fill"></span>
+                    </span>
+                    <input type="email" class="form-control" asp-for="Email" placeholder="Email">
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="border d-flex flex-column w-100">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <span class="bi-key-fill"></span>
+                    </span>
+                    <input type="password" class="form-control" asp-for="Password" placeholder="Password">
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
         </div>
-        <div class="border d-flex w-100">
-            <div class="input-group">
-                <span class="input-group-text">
-                    <span class="bi-key-fill"></span>
-                </span>
-                <input type="text" class="form-control" asp-for="Password" placeholder="Password">
-            </div>
-        </div>
-    </div>
-    <button asp-controller="Home" asp-action="AdminLogin" asp-route-Email="@Model.Email" asp-route-Password="@Model.Password" class="border-0 shadow-none custom-bg-blue text-white rounded-pill w-100 text-center fw-bold p-2 m-1">
-        Log In
-    </button>
+        <button class="border-0 shadow-none custom-bg-blue text-white rounded-pill w-100 text-center fw-bold p-2 m-1">
+            Log In
+        </button>
+    </form>
     <div class="pt-3">
-        Didn't have account? <a asp-controller="Home" asp-action="CreateAccount">Sign Up</a>
+        Didn't have account? <a asp-controller="Registration" asp-action="CreateAccount">Sign Up</a>
     </div>
 </div>

@@ -32,7 +32,7 @@ namespace LoginSignup.Controllers
             {
                 _db.Accounts.Add(obj);
                 _db.SaveChanges();
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index","Login");
             }
             return View(obj);
         }

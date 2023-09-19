@@ -36,7 +36,12 @@ html {
 .custom-shadow {
     box-shadow: 0 0 10px gray,0 0 0 150vh rgba(255,255,255,0.5);
 }
-
+button{
+    transition:ease .2s;
+}
+button:active{
+    transform:scale(.95);
+}
 
 main{
     background-image:url(../images/nts-bg.png)

@@ -11,7 +11,7 @@
             Log in with your register account.
         </div>
     </div>
-    <form method="post" asp-controller="Home" asp-action="AdminLogin">
+    <form method="post" asp-controller="Login" asp-action="Index">
         <div class="p-2 w-100">
             <div class="border d-flex flex-column w-100">
                 <div class="input-group">
@@ -40,3 +40,8 @@
         Didn't have account? <a asp-controller="Registration" asp-action="CreateAccount">Sign Up</a>
     </div>
 </div>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

@@ -1,6 +1,6 @@
 ﻿@model LoginSignup.Models.AccountModel
 @{
-    ViewData["Title"] = "AdminLogin";
+    ViewData["Title"] = "Home";
 }
 <div class="custom-shadow d-flex flex-column align-self-center w-50 w md rounded-3 align-items-center justify-content-center p-2 custom-bg-blue">
     <h3 class="text-dark">Welcome, @Model.FirstName @Model.LastName</h3>
@@ -93,5 +93,5 @@
     </dl>
 </div>
 <div>
-    <a asp-controller="Home" asp-action="Index" class="btn btn-danger m-1">Log Out</a>
+    <a asp-controller="Login" asp-action="Logout" class="btn btn-danger m-1">Log Out</a>
 </div>

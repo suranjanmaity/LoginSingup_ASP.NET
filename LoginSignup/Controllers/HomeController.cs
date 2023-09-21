@@ -4,18 +4,19 @@ using LoginSignup.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Security.Principal;
 
 namespace LoginSignup.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor? _context;
+        private readonly AccountContext _db;
 
-        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor? context)
+        public HomeController(IHttpContextAccessor? context,AccountContext db)
         {
-            _logger = logger;
             _context = context;
+            _db = db;
         }
         public IActionResult Home(AccountModel account)
         {
@@ -26,6 +27,17 @@ namespace LoginSignup.Controllers
                 #pragma warning restore CS8602 // Rethrow to preserve stack details
             {
                 return View(account);
+            }
+            return RedirectToAction("Index", "Login");
+        }
+        public IActionResult AllAccounts()
+        {
+                #pragma warning disable CS8602 // Rethrow to preserve stack details
+            if (_context.HttpContext.Session.GetString("login") != null &&
+                _context.HttpContext.Session.GetString("login") != "")
+                #pragma warning restore CS8602 // Rethrow to preserve stack details
+            {
+                return View(_db.Accounts.ToList());
             }
             return RedirectToAction("Index", "Login");
         }

@@ -18,6 +18,8 @@ namespace LoginSignup.Controllers
         }
         public IActionResult Index()
         {
+            _context.HttpContext.Session.SetString("login", "");
+            TempData.Remove("login");
             return View();
         }
         [HttpPost]
@@ -36,16 +38,16 @@ namespace LoginSignup.Controllers
                 
                 #pragma warning disable CS8602 // Rethrow to preserve stack details
                 _context.HttpContext.Session.SetString("login", accFromDb.Email);
-                #pragma warning restore CS8602 // Rethrow to preserve stack details
+#pragma warning restore CS8602 // Rethrow to preserve stack details
+                TempData["login"]=accFromDb.Email;
                 return RedirectToAction("Home","Home",accFromDb);
             }
             return View(obj);
         }
         public IActionResult Logout()
         {
-            #pragma warning disable CS8602 // Rethrow to preserve stack details
             _context.HttpContext.Session.SetString("login", "");
-            #pragma warning restore CS8602 // Rethrow to preserve stack details
+            TempData.Remove("login");
             return View("Index");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

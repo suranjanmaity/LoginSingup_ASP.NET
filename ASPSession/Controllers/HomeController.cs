@@ -6,11 +6,9 @@ namespace ASPSession.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor _context;
-        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor context)
+        public HomeController(IHttpContextAccessor context)
         {
-            _logger = logger;
             _context = context;
         }
 

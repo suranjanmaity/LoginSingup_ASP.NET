@@ -15,6 +15,9 @@ html {
 .vh-90{
     height:90vh
 }
+.vw-90{
+    width:90vw
+}
 .fw-500 {
     font-weight: 500
 }

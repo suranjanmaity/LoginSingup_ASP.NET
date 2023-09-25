@@ -1,4 +1,5 @@
 using LoginSignup.Data;
+using LoginSignup.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,12 +9,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AccountContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("conString")
     ));
+////for service
+builder.Services.AddTransient<IHomeService, HomeService>();
 //for session
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(20);
 }
     );
 var app = builder.Build();

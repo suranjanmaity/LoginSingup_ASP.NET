@@ -2,104 +2,130 @@
 
 @{
     ViewData["Title"] = "All Accounts";
+   
 }
-<div class="overflow-scroll custom-bg-gray custom-shadow">
-<h1>
-    All Accounts
-</h1>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    First Name
-                </th>
-                <th>
-                    Last Name
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Gender
-                </th>
-                <th>
-                    Music
-                </th>
-                <th>
-                    Sports
-                </th>
-                <th>
-                    Travel
-                </th>
-                <th>
-                    Movies
-                </th>
-                <th>
-                    Source Of Income
-                </th>
-                <th>
-                    Income
-                </th>
-                <th>
-                    Age
-                </th>
-                <th>
-                    Bio
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Music)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Sports)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Travel)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Movies)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SourceOfIncome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Income)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Age)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Bio)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
+<div class="custom-bg-gray custom-shadow py-2 px-4 m-3 vh-90 vw-90 rounded rounded-2 d-flex flex-column">
+<div class="d-flex flex-row justify-content-between align-items-center rounded-3 p-3">
+    <h1 class="text-primary">
+        All Accounts
+    </h1>
+    <div class="d-flex gap-2">
+        <a asp-controller="Registration" asp-action="CreateAccount" class=" btn btn-success">Add Account</a>
+        <a asp-controller="Home" asp-action="MyDetails" class=" btn btn-outline-primary rounded-circle">
+            <i class="bi bi-person-circle"></i>
+        </a>
+    </div>
 </div>
+    <div class="h-75 overflow-scroll">
+        <table class="table table-bordered h-75">
+            <thead class="sticky-top bg-white mt-0">
+                <tr>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Music
+                    </th>
+                    <th>
+                        Sports
+                    </th>
+                    <th>
+                        Travel
+                    </th>
+                    <th>
+                        Movies
+                    </th>
+                    <th>
+                        Source Of Income
+                    </th>
+                    <th>
+                        Income
+                    </th>
+                    <th>
+                        Age
+                    </th>
+                    <th>
+                        Bio
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in Model)
+                    {
+                        
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Music)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Sports)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Travel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Movies)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SourceOfIncome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Income)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Age)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Bio)
+                            </td>
+                            <td class="btn-group">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#id_@item.Id">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <partial name="_UpdatePartial" model="item" />
+                                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@{
+    if (TempData["id"]!= null)
+    {
+        <script>
+            $('#id_@TempData["id"].ToString()').modal('show');
+            $('#id_@TempData["id"].ToString()').modal('toggle');
+        </script>
+    }
+}

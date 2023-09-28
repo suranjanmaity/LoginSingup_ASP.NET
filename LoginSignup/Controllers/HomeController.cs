@@ -76,12 +76,9 @@ namespace LoginSignup.Controllers
                 if (account != null)
                 {
                     AccountModel accFromDb = _db.Accounts.SingleOrDefault(obj => obj.Id == account.Id)!;
-                    if(ModelState.IsValid)
+                    if (_service.UpdatePartial(account))
                     {
-                        if (_service.UpdatePartial(account))
-                        {
-                            return RedirectToAction("AllAccounts", _db.Accounts.ToList());
-                        }
+                        return RedirectToAction("AllAccounts", _db.Accounts.ToList());
                     }
                 }
                 return RedirectToAction("AllAccounts", _db.Accounts.ToList());

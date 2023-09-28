@@ -45,13 +45,13 @@
                             </div>
                             <div class="d-flex gap-3">
                                 <div class="form-check">
-                                    <input type="radio" asp-for="Gender" value="Male" class="form-check-input">
+                                    <input type="radio" asp-for="Gender" value="Male" id="Male_@Model.Id" class="form-check-input">
                                     <label class="form-check-label">
                                         Male
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="radio" asp-for="Gender" value="Female" class="form-check-input">
+                                    <input type="radio" asp-for="Gender" value="Female" id="Female_@Model.Id" class="form-check-input">
                                     <label class="form-check-label">
                                         Female
                                     </label>
@@ -62,19 +62,19 @@
                             <label class="fw-500 text-primary d-flex flex-row">Hobbies</label>
                             <div class="d-flex gap-3">
                                 <div class="d-flex">
-                                    <input type="checkbox" asp-for="Music" class="form-check">
+                                    <input type="checkbox" asp-for="Music" id="Music_@Model.Id" class="form-check">
                                     <label asp-for="Music" class="form-check-label"></label>
                                 </div>
                                 <div class="d-flex">
-                                    <input type="checkbox" asp-for="Sports" class="form-check">
+                                    <input type="checkbox" asp-for="Sports" id="Sports_@Model.Id" class="form-check">
                                     <label asp-for="Sports" class="form-check-label"></label>
                                 </div>
                                 <div class="d-flex">
-                                    <input type="checkbox" asp-for="Travel" class="form-check">
+                                    <input type="checkbox" asp-for="Travel" id="Travel_@Model.Id" class="form-check">
                                     <label asp-for="Travel" class="form-check-label"></label>
                                 </div>
                                 <div class="d-flex">
-                                    <input type="checkbox" asp-for="Movies" class="form-check">
+                                    <input type="checkbox" asp-for="Movies" id="Movies_@Model.Id" class="form-check">
                                     <label asp-for="Movies" class="form-check-label"></label>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                     <div class="d-flex gap-3">
                         <div class="w-100">
                             <label class="fw-500 text-primary" asp-for="SourceOfIncome"></label>
-                            <select asp-for="SourceOfIncome" class="form-control" asp-items="Html.GetEnumSelectList<SourceOfIncome>()"></select>
+                            <select asp-for="SourceOfIncome" id="SourceOfIncome_@Model.Id" class="form-control" asp-items="Html.GetEnumSelectList<SourceOfIncome>()"></select>
                         </div>
                         <div class="w-100 d-flex justify-content-center gap-2">
                             <div class="w-100">

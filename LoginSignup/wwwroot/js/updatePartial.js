@@ -1,14 +1,24 @@
 ﻿var accId;
 function edit(id) {
     accId = id;
-    var valid = false;
+    let err = [false, false, false, false, false];
     //console.log(accId);
     // for range in partial view
     $('#sal-range_' + accId).change(function () {
         let sal_value = parseInt($('#sal-range_' + accId).val()) / 1000;
         sal_value = sal_value + "K";
         $('#sal-value_' + accId).text(sal_value);
+        buttonEnable();
     });
+    $('#Male_'+accId+
+        ',#Female_'+accId+
+        ',#Music_'+accId+
+        ',#Sports_'+accId+
+        ',#Travel_'+accId+
+        ',#Movies_' + accId+
+        ',#SourceOfIncome_' + accId).change(function () {
+            buttonEnable();
+        })
     //for disabling submit button
     $("#submit_" + accId).prop("disabled", true);
 
@@ -16,107 +26,117 @@ function edit(id) {
         validateBio();
         buttonEnable();
     });
-    function validateBio() {
-        let bio = $("#Bio_" + accId).val();
-        if (bio.length > 200) {
-            $("#errBio_" + accId).text("Maximum 200 characters.");
-            valid = false;
-        }
-        else {
-            $("#errBio_" + accId).text("");
-            valid = true;
-        }
-    }
     $("#Age_" + accId).keyup(function () {
         validateAge();
         buttonEnable();
     });
-    function validateAge() {
-        let Age = $("#Age_" + accId).val();
-        if (Age > 100) {
-            $("#errAge_" + accId).text("Maximum 100 years");
-            valid = false;
-        }
-        else if (Age < 18) {
-            $("#errAge_" + accId).text("Minimum 18 years");
-            $("#Age_" + accId).val(18);
-            valid = false;
-        }
-        else {
-            $("#errAge_" + accId).text("");
-            valid = true;
-        }
-    }
     $("#Email_" + accId).keyup(function () {
         validateEmail();
         buttonEnable();
     });
-    function validateEmail() {
-        let email = $("#Email_" + accId).val();
-        let pattern = /^[\w\.-]+@[\da-zA-Z\.-]+\.[a-zA-Z]{2,}([a-zA-Z]{2,})?$/;
-        if (email.length == 0) {
-            $("#errEmail_" + accId).text("Required");
-            valid = false;
-        }
-        else if (!pattern.test(email)) {
-            $("#errEmail_" + accId).text("Invalid Email. Please use a valid one.");
-            valid = false;
-        }
-        else {
-            $("#errEmail_" + accId).text("");
-            valid = true;
-        }
-    }
     $("#FirstName_" + accId).keyup(function () {
         validateFirstName();
         buttonEnable();
     });
-    function validateFirstName() {
-        let name = $("#FirstName_" + accId).val();
-        let pattern = /^[a-zA-Z]+$/;
-        if (name.length == 0) {
-            $("#errFirstName_" + accId).text("Required");
-            valid = false;
-        }
-        else if (!pattern.test(name)) {
-            $("#errFirstName_" + accId).text("Use Alphabets only");
-            valid = false;
-        }
-        else if (name.length > 20) {
-            $("#errFirstName_" + accId).text("Max 20 characters");
-            valid = false;
-        }
-        else {
-            $("#errFirstName_" + accId).text("");
-            valid = true;
-        }
-    }
     $("#LastName_" + accId).keyup(function () {
         validateLastName();
         buttonEnable();
     });
+    function validateBio() {
+        let bio = $("#Bio_" + accId).val();
+        if (bio.length > 200) {
+            err[4] = true;
+            $("#errBio_" + accId).text("Maximum 200 characters.");
+        }
+        else {
+            err[4] = false;
+            $("#errBio_" + accId).text("");
+        }
+    }
+    function validateAge() {
+        let Age = $("#Age_" + accId).val();
+        if (Age > 100) {
+            err[3] = true;
+            $("#errAge_" + accId).text("Maximum 100 years");
+        }
+        else if (Age < 18) {
+            err[3] = true;
+            $("#errAge_" + accId).text("Minimum 18 years");
+            $("#Age_" + accId).val(18);
+        }
+        else {
+            err[3] = false;
+            $("#errAge_" + accId).text("");
+        }
+    }
+    function validateEmail() {
+        let email = $("#Email_" + accId).val();
+        let pattern = /^[\w\.-]+@[\da-zA-Z\.-]+\.[a-zA-Z]{2,}([a-zA-Z]{2,})?$/;
+        if (email.length == 0) {
+            err[2] = true;
+            $("#errEmail_" + accId).text("Required");
+        }
+        else if (!pattern.test(email)) {
+            err[2] = true;
+            $("#errEmail_" + accId).text("Invalid Email. Please use a valid one.");
+        }
+        else {
+            err[2] = false;
+            $("#errEmail_" + accId).text("");
+        }
+    }
+    function validateFirstName() {
+        let name = $("#FirstName_" + accId).val();
+        let pattern = /^[a-zA-Z]+$/;
+        if (name.length == 0) {
+            err[0] = true;
+            $("#errFirstName_" + accId).text("Required");
+        }
+        else if (!pattern.test(name)) {
+            err[0] = true;
+            $("#errFirstName_" + accId).text("Use Alphabets only");
+        }
+        else if (name.length > 20) {
+            err[0] = true;
+            $("#errFirstName_" + accId).text("Max 20 characters");
+        }
+        else {
+            err[0] = false;
+            $("#errFirstName_" + accId).text("");
+        }
+    }
+    
     function validateLastName() {
         let name = $("#LastName_" + accId).val();
         let pattern = /^[a-zA-Z]+$/;
-        if (name=='') {
+        if (name == '') {
+            err[1] = true;
             $("#errLastName_" + accId).text("");
-            valid = true;
         }
         else if (!pattern.test(name)) {
+            err[1] = true;
             $("#errLastName_" + accId).text("Use Alphabets only");
-            valid = false;
         }
         else if (name.length > 20) {
+            err[1] = true;
             $("#errLastName_" + accId).text("Max 20 characters");
-            valid = false;
         }
         else {
+            err[1] = false;
             $("#errLastName_" + accId).text("");
-            valid = true;
         }
     }
     function buttonEnable() {
-        if (valid) {
+        
+        let valid = 0;
+        jQuery.each(err,function(i, e) {
+            //console.log(e); for debugging
+            if (e) {
+                valid = 1;
+                
+            };
+        });
+        if (valid!=1) {
             $("#submit_" + accId).prop("disabled", false);
         }
         else {

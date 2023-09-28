@@ -1,8 +1,5 @@
 ﻿@model AccountModel
 @{
-    if (TempData["id"] != null){
-    }
-
     ViewData["Title"] = "Edit";
 }
 <style>
@@ -23,41 +20,23 @@
                         <div class="w-100">
                             <div>
                                 <label class="fw-500 text-primary" asp-for="FirstName"></label>
-                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                                <span asp-validation-for="FirstName" class="text-danger" id="errFirstName_@Model.Id"></span>
                             </div>
-                            <input asp-for="FirstName" class="form-control" placeholder="enter your first name">
+                            <input asp-for="FirstName" class="form-control" id="FirstName_@Model.Id" placeholder="enter your first name">
                         </div>
                         <div class="w-100">
                             <div>
                                 <label class="fw-500 text-primary" asp-for="LastName"></label>
-                                <span asp-validation-for="LastName" class="text-danger"></span>
+                                <span asp-validation-for="LastName" class="text-danger" id="errLastName_@Model.Id"></span>
                             </div>
-                            <input asp-for="LastName" class="form-control" placeholder="enter your last name">
+                            <input asp-for="LastName" class="form-control" id="LastName_@Model.Id" placeholder="enter your last name">
                         </div>
                     </div>
                     <div>
-                        <label class="fw-500 text-primary" asp-for="Email"></label>
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <label class="fw-500 text-primary" asp-for="Email" ></label>
+                        <span asp-validation-for="Email" class="text-danger" id="errEmail_@Model.Id"></span>
                     </div>
-                    <input asp-for="Email" type="email" class="form-control" placeholder="enter your email">
-
-                    <div class="d-flex gap-3">
-                        <div class="w-100">
-                            <div>
-                                <label class="fw-500 text-primary">Old Password</label>
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                            </div>
-                            <input asp-for="Password" type="password" class="form-control" placeholder="enter your password">
-                        </div>
-                        <div class="w-100">
-                            <div>
-                                <label class="fw-500 text-primary">New Password</label>
-                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                            </div>
-                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="enter new password">
-                        </div>
-                    </div>
-
+                    <input asp-for="Email" type="email" class="form-control" id="Email_@Model.Id" placeholder="enter your email">
                     <div class="d-flex gap-3">
                         <div class="w-100">
                             <div>
@@ -125,16 +104,19 @@
                         <div class="w-100">
                             <div>
                                 <label class="fw-500 text-primary" asp-for="Age"></label>
-                                <span asp-validation-for="Age" class="text-danger"></span>
+                                <span id="errAge_@Model.Id" class="text-danger"></span>
                             </div>
-                            <input asp-for="Age" class="form-control">
+                            <input asp-for="Age" id="Age_@Model.Id" class="form-control">
                         </div>
                     </div>
-                    <label class="fw-500 text-primary" asp-for="Bio"></label>
-                    <textarea asp-for="Bio" class="form-control" rows="3"></textarea>
+                    <div>
+                        <label class="fw-500 text-primary" asp-for="Bio"></label>
+                        <span id="errBio_@Model.Id" class="text-danger"></span>
+                    </div>
+                    <textarea asp-for="Bio" id="Bio_@Model.Id" class="form-control" rows="3"></textarea>
                     <div class="d-flex justify-content-end gap-2">
                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#id_@Model.Id">Close</button>
-                        <button class="btn btn-primary" type="submit">Update</button>
+                        <button class="btn btn-primary" id="submit_@Model.Id" type="submit">Update</button>
                     </div>
                 </form>
             </div>
@@ -142,15 +124,9 @@
     </div>
 </div>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<script>
-    $('#sal-range_@Model.Id').change(function () {
-        let sal_value = parseInt($('#sal-range_@Model.Id').val()) / 1000;
-        sal_value = sal_value + "K";
-        $('#sal-value_@Model.Id').text(sal_value);
-    });
-</script>
+
 @section Scripts{
     @{
-        <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
     }
 }

@@ -18,8 +18,10 @@ namespace LoginSignup.Controllers
         }
         public IActionResult Index()
         {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             _context.HttpContext.Session.SetString("login", "");
-            TempData.Remove("login");
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+            TempData.Clear();
             return View();
         }
         [HttpPost]
@@ -35,19 +37,26 @@ namespace LoginSignup.Controllers
                     ModelState.AddModelError("Password", "Email and password didn't match");
                     return View(obj);
                 }
-                
-                #pragma warning disable CS8602 // Rethrow to preserve stack details
-                _context.HttpContext.Session.SetString("login", accFromDb.Email);
-#pragma warning restore CS8602 // Rethrow to preserve stack details
-                TempData["login"]=accFromDb.Email;
-                return RedirectToAction("Home","Home",accFromDb);
+                // to restrict soft deleted email login
+                //if (accFromDb.IsDeleted)
+                //{
+                //    ModelState.AddModelError("Email", "Account linked to this Email has been deleted!");
+                //    return View(obj);
+                //}
+                    #pragma warning disable CS8602 // Rethrow to preserve stack details
+                    _context.HttpContext.Session.SetString("login", accFromDb.Email);
+                    #pragma warning restore CS8602 // Rethrow to preserve stack details
+                    TempData["login"]=accFromDb.Email;
+                    return RedirectToAction("Home","Home",accFromDb);
             }
             return View(obj);
         }
         public IActionResult Logout()
         {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             _context.HttpContext.Session.SetString("login", "");
-            TempData.Remove("login");
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+            TempData.Clear();
             return View("Index");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

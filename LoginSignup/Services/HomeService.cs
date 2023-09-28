@@ -1,5 +1,8 @@
 ﻿using LoginSignup.Data;
 using LoginSignup.Models;
+using System.Net.Mail;
+using System.Security.Principal;
+using System.Text.RegularExpressions;
 
 namespace LoginSignup.Services
 {
@@ -24,31 +27,47 @@ namespace LoginSignup.Services
             }
             return true;
         }
+        public bool IsEmailExist(AccountModel account)
+        {
+            // to get old account email
+            try
+            {
+                AccountModel accFromDb = _db.Accounts.Find(account.Email)!;
+                if (accFromDb!=null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         public bool ValidEmail(AccountModel account)
         {
-            if (account != null)
+            bool isValid = false;
+            var host = account.Email.Split("@")[1];
+            if (host.Split(".").Length>1 && host.Split(".").Length < 5)
             {
-                // to get old account email
-                AccountModel accFromDb = _db.Accounts.Find(account.Id)!;
-                if (accFromDb != null)
+                var company = host.Split(".")[0];
+                var domain = host.Split(".")[1];
+                if(company.Length>2)
                 {
-                    // to check the email is already been used or not
-                    AccountModel accFromDbEmail = _db.Accounts.FirstOrDefault(obj => obj.Email == account.Email)!;
-                    if (account.Email == accFromDb.Email || accFromDbEmail == null)
+                    if(domain.Length>=2 && domain.Length<=4)
                     {
-                        return true;
+                        isValid = true;
                     }
                 }
             }
-            return false;
+            return isValid;
         }
         public bool UpdatePartial(AccountModel account)
         {
             // to get old account details
             AccountModel accFromDb = _db.Accounts.Find(account.Id)!;
-            accFromDb.FirstName = account.FirstName;
+            accFromDb.FirstName = account.FirstName ?? accFromDb.FirstName;
             accFromDb.LastName = account.LastName ?? "";
-            accFromDb.Password = account.ConfirmPassword;//for updating new pass
             accFromDb.Email = account.Email;
             accFromDb.Age = account.Age;
             accFromDb.Gender = account.Gender;
@@ -59,10 +78,17 @@ namespace LoginSignup.Services
             accFromDb.SourceOfIncome = account.SourceOfIncome;
             accFromDb.Income = account.Income;
             accFromDb.Bio = account.Bio ?? "";
-
             _db.Accounts.Update(accFromDb);
             _db.SaveChanges();
             return true;
+        }
+        public void SoftDelete(int id)
+        {
+            // to get old account details
+            AccountModel accFromDb = _db.Accounts.Find(id)!;
+            accFromDb.IsDeleted = true; 
+            _db.Accounts.Update(accFromDb);
+            _db.SaveChanges();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LoginSignup.Data;
 using LoginSignup.Models;
+using LoginSignup.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,12 @@ namespace LoginSignup.Controllers
     {
         private readonly AccountContext _db;
         private readonly IHttpContextAccessor _context;
-        public RegistrationController(AccountContext db, IHttpContextAccessor context)
+        private readonly IHomeService _service;
+        public RegistrationController(AccountContext db, IHttpContextAccessor context,IHomeService service)
         {
             _db = db;
             _context = context;
+            _service = service;
         }
 
         public IActionResult CreateAccount()
@@ -27,19 +30,27 @@ namespace LoginSignup.Controllers
             {
                 ModelState.AddModelError("ConfirmPassword", "Must be same Password");
             }
+            else if (!_service.ValidEmail(obj))
+            {
+                ModelState.AddModelError("Email", "This email is not valid! Use correct Email");
+            }
+            else if (!_service.IsEmailExist(obj))
+            {
+                ModelState.AddModelError("Email", "Email is already used! Use another Email");
+            }
             else if (!(_db.Accounts.SingleOrDefault(accObj => (accObj.Email == obj.Email)) == null))
             {
-                ModelState.AddModelError("Email", "This email address already exists! Use another Email");
+                ModelState.AddModelError("Email", "Invalid! Use another Email");
             }
             if (ModelState.IsValid)
             {
-                _db.Accounts.Add(obj);
-                _db.SaveChanges();
                 #pragma warning disable CS8602 // Rethrow to preserve stack details
                 if (_context.HttpContext.Session.GetString("login") != null &&
                     _context.HttpContext.Session.GetString("login") != "")
                 #pragma warning restore CS8602 // Rethrow to preserve stack details
                 {
+                    _db.Accounts.Add(obj);
+                    _db.SaveChanges();
                     return RedirectToAction("AllAccounts","Home");
                 }
                 return RedirectToAction("Index","Login");

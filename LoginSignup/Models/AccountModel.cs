@@ -19,7 +19,7 @@ namespace LoginSignup.Models
         [DisplayName("Password *")]
         public string Password { get; set; } = null!;
         [DisplayName("Confirm Password *")]
-        [Required(ErrorMessage ="Needs same as Password")]
+        [Required(ErrorMessage ="Needs to be entered")]
         public string ConfirmPassword { get; set; } = null!;
         [Required(ErrorMessage = "One must be selected")]
         public string Gender { get; set; } = null!;
@@ -35,6 +35,7 @@ namespace LoginSignup.Models
         public int Age { get; set; }
 
         public string? Bio { get; set; }
+        public bool IsDeleted {  get; set; }
     }
     public enum SourceOfIncome
     {

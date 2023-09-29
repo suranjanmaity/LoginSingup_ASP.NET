@@ -18,9 +18,6 @@ namespace LoginSignup.Controllers
         }
         public IActionResult Index()
         {
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-            _context.HttpContext.Session.SetString("login", "");
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
             TempData.Clear();
             return View();
         }

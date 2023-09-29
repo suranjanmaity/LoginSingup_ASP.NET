@@ -2,6 +2,15 @@
 @{
     ViewData["Title"] = "My Account";
 }
+@{
+    <script>
+            let login = @TempData["login"];
+            if (login == null || login == "") {
+                // Redirect to Login using JavaScript
+                window.location.href = '@Url.Action("Index", "Login")';
+            }
+    </script>
+}
 <div class="custom-shadow d-flex flex-column align-self-center w-50 w md rounded-3 align-items-center justify-content-center p-2 bg-light">
     <h3 class="text-primary p-2 px-4">Welcome, @Model.FirstName @Model.LastName</h3>
     <hr />
@@ -62,7 +71,7 @@
                     else
                         hob = hob + "Movies";
                 }
-                @hob
+                    @hob
                 ;
             }
 

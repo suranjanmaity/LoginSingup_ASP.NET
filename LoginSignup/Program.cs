@@ -16,8 +16,8 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-}
-    );
+    options.IdleTimeout = TimeSpan.FromMinutes(5); // Set session timeout
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

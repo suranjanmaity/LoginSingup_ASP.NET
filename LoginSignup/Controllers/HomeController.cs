@@ -78,10 +78,15 @@ namespace LoginSignup.Controllers
                     AccountModel accFromDb = _db.Accounts.SingleOrDefault(obj => obj.Id == account.Id)!;
                     if (_service.UpdatePartial(account))
                     {
+                        TempData["success"] = "Details updated successfully.";
                         return RedirectToAction("AllAccounts", _db.Accounts.ToList());
                     }
+                    else
+                    {
+                        TempData["error"] = "Email already been used in another account.";
+                    }
                 }
-                return RedirectToAction("AllAccounts", _db.Accounts.ToList());
+                return View("AllAccounts", _db.Accounts.ToList());
             }
             return RedirectToAction("Index", "Login");
 
@@ -91,6 +96,7 @@ namespace LoginSignup.Controllers
             if(_service.IsValidLogin())
             {
                 _service.SoftDelete(id);
+                TempData["success"] = "Account deleted successfully.";
                 return RedirectToAction("AllAccounts",_db.Accounts.ToList()); 
             }
             return RedirectToAction("Index","Login"); 

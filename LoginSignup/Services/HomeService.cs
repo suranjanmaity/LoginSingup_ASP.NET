@@ -30,19 +30,12 @@ namespace LoginSignup.Services
         public bool IsEmailExist(AccountModel account)
         {
             // to get old account email
-            try
-            {
-                AccountModel accFromDb = _db.Accounts.Find(account.Email)!;
-                if (accFromDb!=null)
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception)
+            AccountModel accFromDb = _db.Accounts.SingleOrDefault(obj=>obj.Email==account.Email)!;
+            if (accFromDb==null)
             {
                 return false;
             }
+            return true;
         }
         public bool ValidEmail(AccountModel account)
         {
@@ -66,9 +59,17 @@ namespace LoginSignup.Services
         {
             // to get old account details
             AccountModel accFromDb = _db.Accounts.Find(account.Id)!;
-            accFromDb.FirstName = account.FirstName ?? accFromDb.FirstName;
+            accFromDb.FirstName = account.FirstName==null ? accFromDb.FirstName:account.FirstName;
             accFromDb.LastName = account.LastName ?? "";
-            accFromDb.Email = account.Email;
+            AccountModel? accFromDb2 = _db.Accounts.SingleOrDefault(obj=>obj.Email==account.Email);
+            if (accFromDb2 == null || accFromDb.Email == account.Email)
+            {
+                accFromDb.Email = account.Email;
+            }
+            else
+            {
+                return false;
+            }
             accFromDb.Age = account.Age;
             accFromDb.Gender = account.Gender;
             accFromDb.Movies = account.Movies;

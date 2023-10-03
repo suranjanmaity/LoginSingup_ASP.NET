@@ -50,10 +50,11 @@ namespace LoginSignup.Controllers
         {
             if (_service.IsValidLogin())
             {
-#pragma warning disable CS8602 // Rethrow to preserve stack details
-
-                return View(_db.Accounts.SingleOrDefault(obj=>obj.Email==_context.HttpContext.Session.GetString("login")));
-#pragma warning restore CS8602 // Rethrow to preserve stack details
+                AccountModel accFromDb = _db.Accounts.SingleOrDefault(obj => obj.Email == _context.HttpContext.Session.GetString("login"))!;
+                string imageBase64Data = Convert.ToBase64String(accFromDb.Image);
+                string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+                ViewBag.ImageDataUrl = imageDataURL;
+                return View(accFromDb);
             }
             return RedirectToAction("Index", "Login");
         }

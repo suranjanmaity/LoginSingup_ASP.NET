@@ -7,7 +7,7 @@
     <hr />
    
     <div>
-        <a asp-controller="Home" asp-action="MyDetails" class="btn btn-primary m-1">
+        <a asp-controller="Home" asp-action="MyDetails" asp-route-email="@Model.Email" class="btn btn-primary m-1">
             <i class="bi bi-person-circle"></i>
             My Account
         </a>

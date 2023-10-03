@@ -1,9 +1,5 @@
 ﻿using LoginSignup.Data;
 using LoginSignup.Models;
-using System.Net.Mail;
-using System.Security.Principal;
-using System.Text.RegularExpressions;
-
 namespace LoginSignup.Services
 {
     
@@ -59,7 +55,7 @@ namespace LoginSignup.Services
         {
             // to get old account details
             AccountModel accFromDb = _db.Accounts.Find(account.Id)!;
-            accFromDb.FirstName = account.FirstName==null ? accFromDb.FirstName:account.FirstName;
+            accFromDb.FirstName = account.FirstName ?? accFromDb.FirstName;
             accFromDb.LastName = account.LastName ?? "";
             AccountModel? accFromDb2 = _db.Accounts.SingleOrDefault(obj=>obj.Email==account.Email);
             if (accFromDb2 == null || accFromDb.Email == account.Email)
@@ -90,6 +86,17 @@ namespace LoginSignup.Services
             accFromDb.IsDeleted = true; 
             _db.Accounts.Update(accFromDb);
             _db.SaveChanges();
+        }
+
+        public void AddAccount(AccountModel obj)
+        {
+            _db.Accounts.Add(obj);
+            _db.SaveChanges();
+        }
+
+        public AccountModel GetAccountByEmail(string email)
+        {
+            
         }
     }
 }

@@ -10,6 +10,5 @@ namespace LoginSignup.Services
         public bool UpdatePartial(AccountModel account);
         public void SoftDelete(int id);
         void AddAccount(AccountModel obj);
-        AccountModel GetAccountByEmail(string email);
     }
 }

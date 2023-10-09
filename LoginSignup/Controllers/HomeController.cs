@@ -19,7 +19,6 @@ namespace LoginSignup.Controllers
             _db = db;
             _service = service;
         }
-        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public IActionResult Home(AccountModel account)
         {
             if (_service.IsValidLogin())
@@ -36,7 +35,6 @@ namespace LoginSignup.Controllers
             }
             return RedirectToAction("Index", "Login");
         }
-        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public IActionResult AllAccounts()
         {
             if (_service.IsValidLogin())
@@ -45,7 +43,6 @@ namespace LoginSignup.Controllers
             }
             return RedirectToAction("Index", "Login");
         }
-        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public IActionResult MyDetails()
         {
             if (_service.IsValidLogin())
@@ -87,7 +84,7 @@ namespace LoginSignup.Controllers
                     }
                     else
                     {
-                        TempData["warning"] = "Email already been used in another account.";
+                        TempData["error"] = "Email already been used in another account.";
                     }
                 }
                 return View("AllAccounts", _db.Accounts.ToList());

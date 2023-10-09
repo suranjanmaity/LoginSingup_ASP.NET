@@ -38,9 +38,7 @@ namespace LoginSignup.Controllers
             {
                 _service.AddAccount(obj);
                 TempData["success"] = "Account added successfully.";
-                if(_service.IsValidLogin())
-                    return RedirectToAction("AllAccounts","Home");
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("AllAccounts","Home");
             }
             return View(obj);
         }

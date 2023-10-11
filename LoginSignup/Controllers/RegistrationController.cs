@@ -3,6 +3,7 @@ using LoginSignup.Models;
 using LoginSignup.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32.SafeHandles;
 
 namespace LoginSignup.Controllers
 {
@@ -43,9 +44,11 @@ namespace LoginSignup.Controllers
                 _db.Accounts.Add(obj);
                 _db.SaveChanges();
                 TempData["success"] = "Account added successfully.";
-                if(_service.IsValidLogin())
+                if (_service.IsValidLogin())
+                {
                     return RedirectToAction("AllAccounts","Home");
-                return RedirectToAction("Home", "Index");
+                }
+                return RedirectToAction("Index", "Login");
             }
             return View(obj);
         }

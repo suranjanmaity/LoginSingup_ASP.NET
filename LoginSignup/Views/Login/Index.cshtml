@@ -12,7 +12,7 @@
             Log in with your register account.
         </div>
     </div>
-    <form method="post" asp-controller="Login" asp-action="Index">
+    <form method="post" asp-controller="Login" asp-action="Index" id="Login">
         <div class="p-2 w-100">
             <div class="border d-flex flex-column w-100">
                 <div class="input-group">
@@ -41,8 +41,13 @@
         Didn't have account? <a asp-controller="Registration" asp-action="CreateAccount">Sign Up</a>
     </div>
 </div>
-@section Scripts{
+<div id="preloader">
+    <div id="loading-spinner"></div>
+</div>
+
+<script src="~/js/Login.js"></script>
+@* @section Scripts{
     @{
         <partial name="_ValidationScriptsPartial" />
     }
-}
+} *@

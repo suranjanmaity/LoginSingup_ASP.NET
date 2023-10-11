@@ -9,13 +9,9 @@ namespace LoginSignup.Controllers
 {
     public class RegistrationController : Controller
     {
-        private readonly AccountContext _db;
-        private readonly IHttpContextAccessor _context;
         private readonly IHomeService _service;
-        public RegistrationController(AccountContext db, IHttpContextAccessor context,IHomeService service)
+        public RegistrationController(IHomeService service)
         {
-            _db = db;
-            _context = context;
             _service = service;
         }
 
@@ -41,8 +37,7 @@ namespace LoginSignup.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Accounts.Add(obj);
-                _db.SaveChanges();
+                _service.AddAccount(obj);
                 TempData["success"] = "Account added successfully.";
                 if (_service.IsValidLogin())
                 {

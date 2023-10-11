@@ -36,6 +36,7 @@ namespace LoginSignup.Models
 
         public string? Bio { get; set; }
         public bool IsDeleted {  get; set; }
+        public byte[]? Image { get; set; }
     }
     public enum SourceOfIncome
     {

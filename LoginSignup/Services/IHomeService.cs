@@ -9,5 +9,6 @@ namespace LoginSignup.Services
         public bool IsEmailExist(AccountModel account);
         public bool UpdatePartial(AccountModel account);
         public void SoftDelete(int id);
+        void AddAccount(AccountModel obj);
     }
 }

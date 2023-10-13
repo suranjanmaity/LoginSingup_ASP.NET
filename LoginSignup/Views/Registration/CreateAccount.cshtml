@@ -2,8 +2,8 @@
     ViewData["Title"] = "Create Account";
 }
 @model AccountModel
+    
 <div class="container w-auto d-flex flex-column align-items-center justify-content-center custom-bg-gray rounded-3">
-
     <div class="fs-2 fw-500 custom-bg-gray">Create Account</div>
     <div class="w-50 w-auto border bg-light rounded-2 p-2">
         <div class="border-4">
@@ -123,7 +123,7 @@
                 </div>
                 <label class="fw-500 custom-color" asp-for="Bio"></label>
                 <textarea asp-for="Bio" class="form-control" rows="3"></textarea>
-                <button class="fw-500 text-white custom-bg rounded w-25 align-self-end border-0" type="submit">Create</button>
+                <button class="fw-500 text-white custom-bg rounded w-25 align-self-end border-0" id="create" type="submit">Create</button>
             </form>
         </div>
     </div>
@@ -132,11 +132,12 @@
 <script src="~/lib/jquery/dist/jquery.js" ></script>
 <script>
     $('#sal-range').change(function () {
-        let sal_value = parseInt($('#sal-range').val())/1000;
+        let sal_value = parseInt($('#sal-range').val()) / 1000;
         sal_value = sal_value + "K";
         $('#sal-value').text(sal_value);
     });
 </script>
+
 @section Scripts{
     @{
     <partial name="_ValidationScriptsPartial"/>

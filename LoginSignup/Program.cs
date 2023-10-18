@@ -1,11 +1,20 @@
 using LoginSignup.Data;
 using LoginSignup.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Negotiate;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
+builder.Services.AddAuthorization(options =>
+{
+    // by default all incomming requests will be authorized according to the default policy
+    options.FallbackPolicy = options.DefaultPolicy;
+});
+
 builder.Services.AddDbContext<AccountContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("conString")
     ));
@@ -34,6 +43,7 @@ app.UseSession();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

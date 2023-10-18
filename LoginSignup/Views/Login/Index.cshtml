@@ -18,7 +18,7 @@
                     <span class="input-group-text">
                         <span class="bi bi-envelope-fill"></span>
                     </span>
-                    <input type="email" class="form-control" asp-for="Email" placeholder="Email">
+                    <input type="email" class="form-control" asp-for="Email" placeholder=@User.Identity?.Name>
                 </div>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
